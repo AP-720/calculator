@@ -124,33 +124,31 @@ function resetCalMemory() {
 // calculate function 
 function operate(numOne, operatorSign, numTwo) {
     if (operatorSign === '+') {
-        result = add(numOne, numTwo);
+        result = add(numOne, numTwo).toFixed(3);
     }
     if (operatorSign === '-') {
-        result = subtract(numOne, numTwo);
+        result = subtract(numOne, numTwo).toFixed(3);
     }
     if (operatorSign === 'x') {
-        result = multiply(numOne, numTwo);
+        result = multiply(numOne, numTwo).toFixed(3);
     }
     if (operatorSign === '÷') {
-        result = divide(numOne, numTwo);
+        result = divide(numOne, numTwo).toFixed(3);
     }
-    
 }
-
 // Basic calculator functions
 function add(a, b) {
-    return a + b;
+    return (a + b);
 };
 
 function subtract(a, b) {
-    return a - b;
+    return (a - b);
 };
 
 function multiply(a, b) {
-    return a * b;
+    return (a * b);
 };
 
 function divide(a, b) {
-    return a / b;
+    return (a / b);
 };
