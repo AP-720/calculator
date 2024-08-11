@@ -4,6 +4,7 @@ const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.querySelector('.equals');
 const allClear = document.querySelector('.all-clear')
+const pointButton = document.querySelector('.point')
 
 let displayValue = '';
 
@@ -22,23 +23,19 @@ numberButtons.forEach((button) => {
         if (calcMemory.operator === '' && calcMemory.secondNum === '') {    
         displayValue += button.textContent;
         display.textContent = displayValue;
-        calcMemory.firstNum = parseInt(displayValue);
+        calcMemory.firstNum = Number(displayValue);
     
-        console.log(calcMemory.firstNum)
-        
         } else if (calcMemory.firstNum !== '' && calcMemory.operator !== '' &&calcMemory.perviousSum !== '') {
         displayValue += button.textContent;
         display.textContent = displayValue;
-        calcMemory.secondNum = parseInt(display.textContent);
-        console.log(calcMemory.secondNum)
-        console.log(displayValue)
+        calcMemory.secondNum = Number(display.textContent);
 
         } else if (calcMemory.firstNum !== '' && calcMemory.operator !== '') {
         displayValue += button.textContent;
         display.textContent = displayValue;
-        calcMemory.secondNum = parseInt(displayValue);
-        console.log(calcMemory.secondNum);
-        } 
+        calcMemory.secondNum = Number(displayValue);
+        }
+        console.log(displayValue)
         console.table(calcMemory)
     })
 });
@@ -54,8 +51,6 @@ operatorButtons.forEach((button) => {
         display.textContent = displayValue;
         calcMemory.operator = button.textContent;
         displayValue = '';
-        console.log(displayValue)
-        console.log(calcMemory.operator)
         } else {
         operate(calcMemory.firstNum, calcMemory.operator, calcMemory.secondNum);
         calcMemory.perviousSum = result;
@@ -63,20 +58,38 @@ operatorButtons.forEach((button) => {
         displayValue = '';
         calcMemory.firstNum = calcMemory.perviousSum;
         calcMemory.secondNum = '';
-        // calcMemory.perviousSum = '';
         calcMemory.operator = button.textContent;
-        console.table(calcMemory)
-        console.log(displayValue)
         }
     
     }
     
 )});
 
+// Point Button
+pointButton.addEventListener('click', () => {
 
- 
+    if (calcMemory.firstNum === '' && displayValue === '') {
+    displayValue = '0.';
+    display.textContent = displayValue;
+    calcMemory.firstNum =+ Number(displayValue);
+    } else if (calcMemory.secondNum === '' && displayValue === '') {
+    displayValue = '0.';
+    display.textContent = displayValue;
+    calcMemory.secondNum =+ Number(displayValue);
+    } else if (calcMemory.firstNum !== '' && calcMemory.operator === ''  &&  (!displayValue.includes('.'))) {
+    displayValue = calcMemory.firstNum + '.';
+    display.textContent = displayValue;
+    calcMemory.firstNum = displayValue;
+    } else if (calcMemory.secondNum !== '' &&  (!displayValue.includes('.'))) {
+    displayValue = calcMemory.secondNum + '.';
+    display.textContent = displayValue;
+    calcMemory.secondNum = displayValue;
+    }
+})
 
-// Equals button
+
+
+ // Equals button
 equalsButton.addEventListener('click', () => {
     
     if (calcMemory.secondNum === '' || calcMemory.operator === '') {
@@ -91,10 +104,7 @@ equalsButton.addEventListener('click', () => {
         calcMemory.perviousSum = '';
         calcMemory.operator = '';
         }
-        console.table(calcMemory)
     });
-
-
 
 // All Clear Button
 allClear.addEventListener('click', () => {
@@ -125,6 +135,7 @@ function operate(numOne, operatorSign, numTwo) {
     if (operatorSign === '÷') {
         result = divide(numOne, numTwo);
     }
+    
 }
 
 // Basic calculator functions
