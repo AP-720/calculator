@@ -87,8 +87,6 @@ pointButton.addEventListener('click', () => {
     }
 })
 
-
-
  // Equals button
 equalsButton.addEventListener('click', () => {
     
@@ -96,6 +94,7 @@ equalsButton.addEventListener('click', () => {
         resetCalMemory();
     } else {
         operate(calcMemory.firstNum, calcMemory.operator, calcMemory.secondNum);
+        // result = roundDecimal(result)
         calcMemory.perviousSum = result;
         display.textContent = result;
         displayValue = result;
@@ -121,20 +120,29 @@ function resetCalMemory() {
     displayValue = '';
 };
 
+function roundDecimal(num) {
+    if (num % 1 !== 0) {
+        return num.toFixed(3);
+    } else {
+        return num;
+    }
+}
+
 // calculate function 
 function operate(numOne, operatorSign, numTwo) {
     if (operatorSign === '+') {
-        result = add(numOne, numTwo).toFixed(3);
+        result = add(numOne, numTwo);
     }
     if (operatorSign === '-') {
-        result = subtract(numOne, numTwo).toFixed(3);
+        result = subtract(numOne, numTwo);
     }
     if (operatorSign === 'x') {
-        result = multiply(numOne, numTwo).toFixed(3);
+        result = multiply(numOne, numTwo);
     }
     if (operatorSign === '÷') {
-        result = divide(numOne, numTwo).toFixed(3);
+        result = divide(numOne, numTwo);
     }
+    result = roundDecimal(result)
 }
 // Basic calculator functions
 function add(a, b) {
