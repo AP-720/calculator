@@ -169,6 +169,17 @@ function operate(numOne, operatorSign, numTwo) {
     if (operatorSign === 'x') {
         result = multiply(numOne, numTwo);
     }
+    if (operatorSign === '÷' && numOne === 0 || numTwo === 0) {
+        display.textContent = 'Nope';
+        displayValue = 'Nope';
+        // displayValue = 'Nope'
+        // display.textContent = displayValue
+        calcMemory.firstNum = '';
+        calcMemory.operator = '';
+        calcMemory.secondNum = '';
+        calcMemory.perviousSum = '';
+        return;
+    }
     if (operatorSign === '÷') {
         result = divide(numOne, numTwo);
     }

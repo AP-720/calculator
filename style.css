@@ -74,6 +74,17 @@ background: linear-gradient(135deg, rgba(205,255,93,1) 0%, rgba(161,235,255,1) 5
     gap: 6px;
 }
 
+.all-clear {
+    background-color: #E17E52;
+}
+
+.delete {
+    background-color: #A9BF84;
+}
+
+.operator {
+    background-color: #B2DEF7;
+}
 
 button {
     font-size: 2em;
