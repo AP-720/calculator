@@ -78,12 +78,24 @@ background: linear-gradient(135deg, rgba(205,255,93,1) 0%, rgba(161,235,255,1) 5
     background-color: #E17E52;
 }
 
+.all-clear:hover {
+    background-color: #e17e52bf;
+}
+
 .delete {
     background-color: #A9BF84;
 }
 
+.delete:hover {
+    background-color: #a9bf84ba;
+}
+
 .operator {
     background-color: #B2DEF7;
+}
+
+.operator:hover {
+    background-color: #b2def7d4;
 }
 
 button {
