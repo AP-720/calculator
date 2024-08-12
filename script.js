@@ -3,10 +3,11 @@ const display = document.querySelector('.screen');
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.querySelector('.equals');
-const allClear = document.querySelector('.all-clear')
-const pointButton = document.querySelector('.point')
+const allClear = document.querySelector('.all-clear');
+const pointButton = document.querySelector('.point');
+const deleteButton = document.querySelector('.delete');
 
-let displayValue = '';
+let displayValue = ''
 
 const calcMemory = {
     firstNum: '',
@@ -51,16 +52,20 @@ operatorButtons.forEach((button) => {
         display.textContent = displayValue;
         calcMemory.operator = button.textContent;
         displayValue = '';
+        console.log(displayValue)
+        console.table(calcMemory) 
         } else {
         operate(calcMemory.firstNum, calcMemory.operator, calcMemory.secondNum);
-        calcMemory.perviousSum = result;
+        calcMemory.perviousSum = Number(result);
         display.textContent = result + ' ' + button.textContent
         displayValue = '';
         calcMemory.firstNum = calcMemory.perviousSum;
         calcMemory.secondNum = '';
         calcMemory.operator = button.textContent;
+        console.log(displayValue)
+        console.table(calcMemory) 
         }
-    
+        
     }
     
 )});
@@ -94,8 +99,7 @@ equalsButton.addEventListener('click', () => {
         resetCalMemory();
     } else {
         operate(calcMemory.firstNum, calcMemory.operator, calcMemory.secondNum);
-        // result = roundDecimal(result)
-        calcMemory.perviousSum = result;
+        calcMemory.perviousSum = Number(result);
         display.textContent = result;
         displayValue = result;
         calcMemory.firstNum = calcMemory.perviousSum;
@@ -111,6 +115,31 @@ allClear.addEventListener('click', () => {
                 return;
     });
 
+// Delete Button 
+deleteButton.addEventListener('click', () => {
+    if (calcMemory.firstNum !== '' && calcMemory.operator === '' && calcMemory.secondNum === '') {
+    displayValue = displayValue.slice(0, displayValue.length-1);
+    calcMemory.firstNum = Number(displayValue);
+    display.textContent = displayValue;
+    console.log(displayValue)
+    console.table(calcMemory)
+    } else if (calcMemory.firstNum !== '' && calcMemory.operator !== '' && calcMemory.secondNum === '') {
+    displayValue = display.textContent.replace(' ', '')
+    displayValue = displayValue.slice(0, displayValue.length-1);
+    calcMemory.operator = '';
+    display.textContent = displayValue;
+    console.log(displayValue)
+    console.table(calcMemory)
+    } else if (calcMemory.secondNum !=='') {
+    displayValue = displayValue.slice(0, displayValue.length-1);
+    calcMemory.secondNum = Number(displayValue);
+    display.textContent = displayValue;
+    console.log(displayValue)
+    console.table(calcMemory)
+    }
+})
+
+    // Reset Function 
 function resetCalMemory() {
     calcMemory.firstNum = '';
     calcMemory.operator = '';
@@ -120,9 +149,10 @@ function resetCalMemory() {
     displayValue = '';
 };
 
+// Decimal Point Rounding 
 function roundDecimal(num) {
     if (num % 1 !== 0) {
-        return num.toFixed(3);
+        return result = num.toFixed(3);
     } else {
         return num;
     }
@@ -142,21 +172,21 @@ function operate(numOne, operatorSign, numTwo) {
     if (operatorSign === '÷') {
         result = divide(numOne, numTwo);
     }
-    result = roundDecimal(result)
+    return roundDecimal(result)
 }
 // Basic calculator functions
 function add(a, b) {
-    return (a + b);
+    return a + b;
 };
 
 function subtract(a, b) {
-    return (a - b);
+    return a - b;
 };
 
 function multiply(a, b) {
-    return (a * b);
+    return a * b;
 };
 
 function divide(a, b) {
-    return (a / b);
+    return a / b;
 };
